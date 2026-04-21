@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FL3X STORE — Streetwear</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --black: #0a0a0a; --white: #f5f2ee; --accent: #e8ff3c; --muted: #888; --card-bg: #141414; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; border-bottom: 1px solid #222; position: sticky; top: 0; background: rgba(10,10,10,0.95); z-index: 100; backdrop-filter: blur(8px); }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 3px; color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: #aaa; text-decoration: none; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cart { background: var(--accent); color: var(--black); border: none; padding: 0.5rem 1.2rem; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px; }
+  .hero { min-height: 88vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 4rem 2.5rem; gap: 2rem; position: relative; overflow: hidden; }
+  .hero::before { content: 'FL3X'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-family: 'Bebas Neue', sans-serif; font-size: 22vw; color: #111; z-index: 0; letter-spacing: -8px; line-height: 1; pointer-events: none; }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-tag { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.95; letter-spacing: 2px; margin-bottom: 1.5rem; }
+  .hero-title span { color: var(--accent); }
+  .hero-sub { color: #888; font-size: 1rem; line-height: 1.7; max-width: 380px; margin-bottom: 2.5rem; font-weight: 300; }
+  .hero-btns { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary { background: var(--accent); color: var(--black); border: none; padding: 0.9rem 2.2rem; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid #333; padding: 0.9rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: border-color 0.2s; }
+  .btn-ghost:hover { border-color: #666; }
+  .hero-visual { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; }
+  .hero-img-box { width: 320px; height: 420px; background: #181818; border-radius: 4px; border: 1px solid #222; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .hero-img-box .placeholder-icon { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: #2a2a2a; letter-spacing: 4px; }
+  .hero-badge { position: absolute; bottom: 1.2rem; left: 1.2rem; background: var(--accent); color: var(--black); padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border-radius: 2px; }
+  .hero-badge-2 { position: absolute; top: 1.2rem; right: 1.2rem; background: #1a1a1a; border: 1px solid #333; color: #aaa; padding: 0.4rem 0.8rem; font-size: 0.75rem; letter-spacing: 1px; border-radius: 2px; }
+  .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; }
+  .stat { padding: 1.5rem 2.5rem; border-right: 1px solid #1a1a1a; }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--accent); letter-spacing: 2px; }
+  .stat-label { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2rem; }
+  .section { padding: 5rem 2.5rem; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; letter-spacing: 2px; }
+  .section-title span { color: var(--accent); }
+  .see-all { color: #666; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; cursor: pointer; transition: color 0.2s; }
+  .see-all:hover { color: var(--white); }
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .product-card { background: var(--card-bg); border-radius: 4px; overflow: hidden; border: 1px solid #1e1e1e; cursor: pointer; transition: transform 0.25s, border-color 0.25s; }
+  .product-card:hover { transform: translateY(-4px); border-color: #333; }
+  .product-img { height: 260px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .product-icon { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: #252525; }
+  .product-tag-pill { position: absolute; top: 0.8rem; left: 0.8rem; background: var(--accent); color: var(--black); font-size: 0.65rem; font-weight: 500; padding: 0.25rem 0.6rem; border-radius: 2px; text-transform: uppercase; letter-spacing: 1px; }
+  .product-info { padding: 1rem 1.2rem; }
+  .product-brand { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.3rem; }
+  .product-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.6rem; }
+  .product-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .product-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); }
+  .product-price .old { font-size: 0.9rem; color: #555; text-decoration: line-through; margin-right: 0.4rem; font-family: 'DM Sans', sans-serif; font-weight: 300; }
+  .add-btn { width: 32px; height: 32px; background: #252525; border: 1px solid #333; border-radius: 2px; color: var(--white); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .add-btn:hover { background: var(--accent); color: var(--black); border-color: var(--accent); }
+  .banner { margin: 0 2.5rem; padding: 3.5rem; background: var(--accent); border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+  .banner-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--black); letter-spacing: 2px; line-height: 1; }
+  .banner-text p { color: #333; font-size: 0.95rem; margin-top: 0.5rem; }
+  .banner-btn { background: var(--black); color: var(--accent); border: none; padding: 1rem 2.5rem; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px; white-space: nowrap; }
+  .categories { padding: 5rem 2.5rem; }
+  .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .cat-card { height: 160px; background: #141414; border: 1px solid #1e1e1e; border-radius: 4px; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem; cursor: pointer; transition: border-color 0.2s; }
+  .cat-card:hover { border-color: var(--accent); }
+  .cat-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; }
+  .cat-count { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2rem; }
+  footer { border-top: 1px solid #1a1a1a; padding: 3rem 2.5rem; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--accent); letter-spacing: 3px; margin-bottom: 0.8rem; }
+  .footer-desc { color: #555; font-size: 0.85rem; line-height: 1.7; max-width: 260px; }
+  .footer-col h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a { color: #555; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid #1a1a1a; padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; }
+  .footer-bottom p { color: #444; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">FL3X</div>
+  <ul class="nav-links">
+    <li><a href="#">Hombres</a></li>
+    <li><a href="#">Mujeres</a></li>
+    <li><a href="#">Colecciones</a></li>
+    <li><a href="#">Drops</a></li>
+  </ul>
+  <button class="nav-cart">Carrito (0)</button>
+</nav>
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-tag">Nueva temporada — SS25</p>
+    <h1 class="hero-title">VISTE<br>TU <span>ACTITUD</span></h1>
+    <p class="hero-sub">Streetwear diseñado para los que no siguen tendencias, las crean. Piezas limitadas, estilo sin límites.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Ver colección</button>
+      <button class="btn-ghost">Nuevos drops</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-box">
+      <div class="placeholder-icon">FL3X</div>
+      <div class="hero-badge">New Drop</div>
+      <div class="hero-badge-2">SS25</div>
+    </div>
+  </div>
+</section>
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Clientes satisfechos</div></div>
+  <div class="stat"><div class="stat-num">12</div><div class="stat-label">Drops al año</div></div>
+  <div class="stat"><div class="stat-num">48h</div><div class="stat-label">Envío express</div></div>
+</div>
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">PIEZAS <span>DESTACADAS</span></h2>
+    <span class="see-all">Ver todo →</span>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img"><div class="product-icon">TEE</div><div class="product-tag-pill">Nuevo</div></div>
+      <div class="product-info">
+        <div class="product-brand">FL3X Essentials</div>
+        <div class="product-name">Oversized Tee — Washed Black</div>
+        <div class="product-bottom"><div class="product-price">Q180</div><button class="add-btn">+</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:#1c1a14;"><div class="product-icon">HOOD</div><div class="product-tag-pill" style="background:#fff;color:#000;">Agotándose</div></div>
+      <div class="product-info">
+        <div class="product-brand">FL3X Heavy</div>
+        <div class="product-name">Heavyweight Hoodie — Sand</div>
+        <div class="product-bottom"><div class="product-price"><span class="old">Q380</span>Q320</div><button class="add-btn">+</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:#131820;"><div class="product-icon">CRGO</div></div>
+      <div class="product-info">
+        <div class="product-brand">FL3X Bottoms</div>
+        <div class="product-name">Cargo Pants — Midnight</div>
+        <div class="product-bottom"><div class="product-price">Q420</div><button class="add-btn">+</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="banner">
+  <div class="banner-text">
+    <h2>DROP MENSUAL<br>YA DISPONIBLE</h2>
+    <p>Piezas limitadas. Una vez que se van, se van.</p>
+  </div>
+  <button class="banner-btn">Ver el drop →</button>
+</div>
+<section class="categories">
+  <div class="section-header"><h2 class="section-title">CATEGORÍAS</h2></div>
+  <div class="cat-grid">
+    <div class="cat-card"><div class="cat-name">Camisetas</div><div class="cat-count">24 productos</div></div>
+    <div class="cat-card"><div class="cat-name">Hoodies</div><div class="cat-count">12 productos</div></div>
+    <div class="cat-card"><div class="cat-name">Bottoms</div><div class="cat-count">18 productos</div></div>
+    <div class="cat-card"><div class="cat-name">Accesorios</div><div class="cat-count">9 productos</div></div>
+  </div>
+</section>
+<footer>
+  <div>
+    <div class="footer-logo">FL3X</div>
+    <p class="footer-desc">Streetwear auténtico. Cada pieza diseñada con intención, para quienes viven sin límites.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Tienda</h4>
+    <ul><li><a href="#">Hombres</a></li><li><a href="#">Mujeres</a></li><li><a href="#">Colecciones</a></li><li><a href="#">Drops</a></li></ul>
+  </div>
+  <div class="footer-col">
+    <h4>Ayuda</h4>
+    <ul><li><a href="#">Envíos</a></li><li><a href="#">Devoluciones</a></li><li><a href="#">Tallas</a></li><li><a href="#">Contacto</a></li></ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 FL3X STORE. Todos los derechos reservados.</p>
+  <p>Hecho en Guatemala 🇬🇹</p>
+</div>
+</body>
+</html>
