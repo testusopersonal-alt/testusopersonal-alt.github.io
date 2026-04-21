@@ -1,0 +1,166 @@
+:root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --accent: #e8ff3c;
+    --gray: #666666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Marca de Agua */
+.watermark {
+    position: fixed;
+    bottom: -5vw;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28vw;
+    color: rgba(255, 255, 255, 0.02);
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* Navegación */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+}
+
+.cart-btn {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-btn:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+/* Hero */
+.hero-minimal {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.hero-minimal h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 15vw, 10rem);
+    line-height: 0.8;
+    margin-bottom: 1rem;
+}
+
+.hero-minimal p {
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    color: var(--gray);
+}
+
+/* Grid de Productos */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    padding: 2rem;
+}
+
+/* Slider Táctil */
+.product-card {
+    position: relative;
+}
+
+.product-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    aspect-ratio: 3 / 4;
+}
+
+/* Esconder barra de scroll */
+.product-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.product-slider img {
+    flex: 0 0 100%;
+    width: 100%;
+    object-fit: cover;
+    scroll-snap-align: start;
+    background-color: #1a1a1a;
+}
+
+/* Información del Producto */
+.product-info {
+    padding: 1.5rem 0;
+}
+
+.product-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.product-desc {
+    color: var(--gray);
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin: 0.4rem 0 0.8rem;
+    max-width: 250px;
+}
+
+.product-price {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Footer */
+footer {
+    padding: 5rem 2rem 2rem;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--gray);
+}
+
+/* Responsive para Móviles */
+@media (max-width: 600px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .hero-minimal h1 {
+        font-size: 5.5rem;
+    }
+}
